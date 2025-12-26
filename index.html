@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandwiches de Miga - BENI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 480px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+            margin-top: 0;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #25D366;
+            border: none;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1ebe5d;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🥪 BENI</h1>
+    <h2>Sandwiches de miga</h2>
+
+    <div class="item">
+        <span>Jamón y Queso (docena)</span>
+        <input type="number" id="jyq" min="0" value="0">
+    </div>
+
+    <div class="item">
+        <span>Jamón y Huevo (docena)</span>
+        <input type="number" id="jyh" min="0" value="0">
+    </div>
+
+    <div class="item">
+        <span>Salame y Queso (docena)</span>
+        <input type="number" id="syq" min="0" value="0">
+    </div>
+
+    <div class="item">
+        <span>Surtidos (docena)</span>
+        <input type="number" id="surtidos" min="0" value="0">
+    </div>
+
+    <div class="options">
+        <strong>Modalidad:</strong><br>
+        <label>
+            <input type="radio" name="modalidad" value="Retiro en el local" checked>
+            Retiro en el local
+        </label><br>
+        <label>
+            <input type="radio" name="modalidad" value="Delivery">
+            Delivery
+        </label>
+    </div>
+
+    <button onclick="enviarPedido()">📲 Enviar pedido por WhatsApp</button>
+
+    <div class="footer">
+        Pedido directo por WhatsApp
+    </div>
+</div>
+
+<script>
+function enviarPedido() {
+    const jyq = document.getElementById("jyq").value;
+    const jyh = document.getElementById("jyh").value;
+    const syq = document.getElementById("syq").value;
+    const surtidos = document.getElementById("surtidos").value;
+
+    const modalidad = document.querySelector('input[name="modalidad"]:checked').value;
+
+    let pedido = "";
+
+    if (jyq > 0) pedido += `- Jamón y Queso: ${jyq} docena(s)%0A`;
+    if (jyh > 0) pedido += `- Jamón y Huevo: ${jyh} docena(s)%0A`;
+    if (syq > 0) pedido += `- Salame y Queso: ${syq} docena(s)%0A`;
+    if (surtidos > 0) pedido += `- Surtidos: ${surtidos} docena(s)%0A`;
+
+    if (pedido === "") {
+        alert("Seleccioná al menos un producto");
+        return;
+    }
+
+    const mensaje = 
+`Hola! 👋%0A
+Nuevo pedido desde:%0A
+📍 BENI%0A%0A
+🛒 Pedido:%0A
+${pedido}%0A
+🚚 Modalidad: ${modalidad}`;
+
+    const telefono = "5491170373536"; // <-- TU NÚMERO
+    const url = `https://wa.me/${telefono}?text=${mensaje}`;
+
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
