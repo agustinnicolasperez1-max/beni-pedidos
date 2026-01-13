@@ -72,23 +72,20 @@ button {
   <h1 id="local">BENIQR</h1>
   <p style="text-align:center;">Elegí tu pedido</p>
 
-  <!-- SANDWICHES -->
   <div class="category" onclick="toggle('sandwich')">🥪 Sándwiches de miga</div>
   <div id="sandwich" class="products">
 
     <div class="subcategory">Clásicos</div>
-
-    <div class="product"><input type="checkbox" value="Jamón y Queso"> Jamón y queso</div>
-    <div class="product"><input type="checkbox" value="Jamón y Huevo"> Jamón y huevo</div>
-    <div class="product"><input type="checkbox" value="Jamón y Tomate"> Jamón y tomate</div>
-    <div class="product"><input type="checkbox" value="Queso y Salame"> Queso y salame</div>
-    <div class="product"><input type="checkbox" value="Queso y Aceitunas"> Queso y aceitunas</div>
-    <div class="product"><input type="checkbox" value="Queso y Choclo"> Queso y choclo</div>
+    <div class="product"><input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
+    <div class="product"><input type="checkbox" value="Jamón y huevo"> Jamón y huevo</div>
+    <div class="product"><input type="checkbox" value="Jamón y tomate"> Jamón y tomate</div>
+    <div class="product"><input type="checkbox" value="Queso y salame"> Queso y salame</div>
+    <div class="product"><input type="checkbox" value="Queso y aceitunas"> Queso y aceitunas</div>
+    <div class="product"><input type="checkbox" value="Queso y choclo"> Queso y choclo</div>
 
     <div class="subcategory">Especiales</div>
-
-    <div class="product"><input type="checkbox" value="Jamón crudo y Queso"> Jamón crudo y queso</div>
-    <div class="product"><input type="checkbox" value="Jamón crudo, Rúcula y Queso Parmesano">
+    <div class="product"><input type="checkbox" value="Jamón crudo y queso"> Jamón crudo y queso</div>
+    <div class="product"><input type="checkbox" value="Jamón crudo, rúcula y queso parmesano">
       Jamón crudo, rúcula y queso parmesano</div>
 
   </div>
@@ -97,19 +94,15 @@ button {
 </div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
-const local = params.get("local") || "Comercio";
-document.getElementById("local").innerText = local;
-
 function toggle(id) {
   const section = document.getElementById(id);
   section.style.display = section.style.display === "block" ? "none" : "block";
 }
 
 function enviarPedido() {
-  const telefono = "5491170373536"; // TU NÚMERO
-
+  const telefono = "5491170373536"; 
   let pedido = "";
+
   document.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
     pedido += `• ${input.value}\n`;
   });
@@ -119,13 +112,7 @@ function enviarPedido() {
     return;
   }
 
-  const mensaje = `Hola! Quiero hacer un pedido desde BENIQR.
-
-Comercio: ${la patagonia}
-
-Pedido:
-${pedido}`;
-
+  const mensaje = `Hola! Quiero hacer un pedido desde BENIQR.\n\nPedido:\n${pedido}`;
   const link = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
   window.open(link, "_blank");
 }
