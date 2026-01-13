@@ -73,7 +73,7 @@ button {
   <p style="text-align:center;">Elegí tu pedido</p>
 
   <div class="category" onclick="toggle('sandwich')">🥪 Sándwiches de miga</div>
-  <div id="sandwich" class="products">
+   <div id="sandwich" class="products">
 
     <div class="subcategory">Clásicos</div>
     <div class="product"><input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
@@ -89,6 +89,31 @@ button {
       Jamón crudo, rúcula y queso parmesano</div>
 
   </div>
+  <div class="category" onclick="toggle('congelados')">❄️ Comida congelada</div>
+
+<div id="congelados" class="products">
+
+  <div class="subcategory">Envasado al vacío</div>
+
+  <div class="product">
+    <input type="checkbox" value="Bondiola desmenuzada (con panes, envasada al vacío)">
+    Bondiola desmenuzada (con panes)
+  </div>
+
+  <div class="subcategory">Congelados</div>
+
+  <div class="product">
+    <input type="checkbox" value="Empanadas congeladas">
+    Empanadas congeladas
+  </div>
+
+  <div class="product">
+    <input type="checkbox" value="Pizzas congeladas">
+    Pizzas congeladas
+  </div>
+
+</div>
+
 
   <button onclick="enviarPedido()">📲 Enviar pedido</button>
 </div>
