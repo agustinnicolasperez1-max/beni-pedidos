@@ -2,108 +2,123 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>BENIQR - Pedidos</title>
+  <title>BENIQR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      display: flex;
-      justify-content: center;
+      background: #f2f2f2;
       padding: 20px;
     }
-    .card {
+    .box {
       background: white;
-      padding: 20px;
       border-radius: 10px;
-      width: 100%;
-      max-width: 400px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
-      color: #b33;
-    }
-    .category {
-      background: #eee;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .products {
-      display: none;
-      margin-top: 10px;
-    }
-    .product {
-      margin-bottom: 5px;
+      color: #7a3e2f;
     }
     button {
       width: 100%;
-      background: #25D366;
+      padding: 12px;
+      margin: 5px 0;
+      background: #7a3e2f;
       color: white;
       border: none;
-      padding: 12px;
+      border-radius: 5px;
       font-size: 16px;
-      border-radius: 6px;
-      margin-top: 15px;
       cursor: pointer;
+    }
+    button:hover {
+      background: #5c2e22;
+    }
+    .product {
+      background: #eee;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #pedido {
+      margin-top: 10px;
+      background: #fff8e1;
+      padding: 10px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-  <h1 id="local">BENIQR</h1>
-  <p style="text-align:center;">Elegí tu pedido</p>
+<div class="box">
+  <h1>BENIQR</h1>
+  <p>Elegí tu pedido:</p>
 
-  <div class="category" onclick="toggle('miga')">🥪 Sándwiches de miga</div>
-  <div id="miga" class="products">
-    <div class="product"><input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
-    <div class="product"><input type="checkbox" value="Jamón y huevo"> Jamón y huevo</div>
-    <div class="product"><input type="checkbox" value="Jamón y tomate"> Jamón y tomate</div>
-    <div class="product"><input type="checkbox" value="Queso y salame"> Queso y salame</div>
-    <div class="product"><input type="checkbox" value="Queso y aceitunas"> Queso y aceitunas</div>
-    <div class="product"><input type="checkbox" value="Queso y choclo"> Queso y choclo</div>
+  <button onclick="mostrar('miga')">🥪 Sándwiches de miga</button>
+  <button onclick="mostrar('congelados')">❄️ Congelados</button>
+
+  <div id="productos"></div>
+
+  <div id="pedido">
+    <strong>Tu pedido:</strong>
+    <div id="lista"></div>
   </div>
 
-  <div class="category" onclick="toggle('congelados')">❄️ Comida congelada</div>
-  <div id="congelados" class="products">
-    <div class="product"><input type="checkbox" value="Bondiola desmenuzada"> Bondiola desmenuzada</div>
-    <div class="product"><input type="checkbox" value="Empanadas"> Empanadas</div>
-    <div class="product"><input type="checkbox" value="Pizzas"> Pizzas</div>
-  </div>
-
-  <button onclick="enviarPedido()">📲 Enviar pedido</button>
+  <button onclick="enviarPedido()">📲 Enviar pedido por WhatsApp</button>
 </div>
 
 <script>
-  const comercios = {
-    patagonia: "Fiambrería La Patagonia",
-    kiosco: "gusty",
-    kiosco: " el angel "
+  let pedido = [];
+
+  const productos = {
+    miga: [
+      "Jamón y queso",
+      "Jamón y huevo",
+      "Jamón y tomate",
+      "Queso y salame",
+      "Queso y aceitunas",
+      "Jamón crudo y queso",
+      "Jamón crudo, rúcula y parmesano",
+      "Queso y choclo"
+    ],
+    congelados: [
+      "Bondiola desmenuzada",
+      "Empanadas",
+      "Pizzas"
+    ]
   };
 
-  const params = new URLSearchParams(window.location.search);
-const path = params.get("local");
-  document.getElementById("local").innerText = "BENIQR - " + nombre;
+  function mostrar(categoria) {
+    const contenedor = document.getElementById("productos");
+    contenedor.innerHTML = "";
 
-  function toggle(id) {
-    const el = document.getElementById(id);
-    el.style.display = el.style.display === "block" ? "none" : "block";
+    productos[categoria].forEach(p => {
+      const div = document.createElement("div");
+      div.className = "product";
+      div.innerText = p;
+      div.onclick = () => agregar(p);
+      contenedor.appendChild(div);
+    });
+  }
+
+  function agregar(producto) {
+    pedido.push(producto);
+    document.getElementById("lista").innerHTML = pedido.join("<br>");
   }
 
   function enviarPedido() {
-    const checks = document.querySelectorAll("input[type=checkbox]:checked");
-    if (checks.length === 0) {
-      alert("Seleccioná al menos un producto");
+    if (pedido.length === 0) {
+      alert("Elegí al menos un producto");
       return;
     }
 
-    let pedido = `Pedido de: ${nombre}%0A%0A`;
-    checks.forEach(c => pedido += `- ${c.value}%0A`);
+    const texto = "Hola! Quiero pedir:\n\n" + pedido.join("\n");
+    const telefono = "5491170373536";
 
-    const telefono = "5491170373536"; // TU WHATSAPP
-    window.open(`https://wa.me/${telefono}?text=${pedido}`, "_blank");
+    const url = "https://wa.me/" + telefono + "?text=" + encodeURIComponent(texto);
+    window.open(url, "_blank");
   }
 </script>
 
