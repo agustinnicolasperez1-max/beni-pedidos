@@ -83,9 +83,8 @@
     kiosco: " el angel "
   };
 
-  const path = window.location.pathname.replace("/", "");
-  const nombre = comercios[path] || "Comercio";
-
+  const params = new URLSearchParams(window.location.search);
+const path = params.get("local");
   document.getElementById("local").innerText = "BENIQR - " + nombre;
 
   function toggle(id) {
