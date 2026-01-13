@@ -1,140 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>BENIQR - Pedidos</title>
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background:#f5f5f5;
-}
-
-.card{
-  max-width:500px;
-  margin:40px auto;
-  background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-
-h1{
-  text-align:center;
-  color:#8b5c5c;
-}
-
-.category{
-  background:#eee;
-  padding:12px;
-  border-radius:8px;
-  margin-top:10px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-  .products{
-  display:none;
-  padding:10px;
-  position: relative;
-  z-index: 10;
-}
-  
-.products{
-  display:block;
-  padding:6px;
-  cursor:pointer;
-}
-
-.subcategory{
-  margin-top:10px;
-  font-weight:bold;
-  color:#555;
-}
-
-.product{
-  margin-left:10px;
-}
-
-button{
-  width:100%;
-  margin-top:20px;
-  padding:12px;
-  background:#25D366;
-  border:none;
-  color:white;
-  font-size:16px;
-  border-radius:8px;
-  cursor:pointer;
-}
-</style>
-
-<script>
-function toggle(id){
-  const el = document.getElementById(id);
-  el.style.display = el.style.display === "none" ? "block" : "none";
-}
-
-function enviarPedido(){
-  let productos = document.querySelectorAll('input:checked');
-  let texto = "Hola! Quiero pedir:\n";
-
-  productos.forEach(p=>{
-    texto += "- " + p.value + "\n";
-  });
-
-  let numero = "5491170373536"; // TU NÚMERO DE WHATSAPP
-  let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(texto);
-  window.open(url, "_blank");
-}
-</script>
+  <meta charset="UTF-8">
+  <title>BENIQR - Pedidos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
+    h1 {
+      text-align: center;
+      color: #b33;
+    }
+    .category {
+      background: #eee;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .products {
+      display: none;
+      margin-top: 10px;
+    }
+    .product {
+      margin-bottom: 5px;
+    }
+    button {
+      width: 100%;
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
 
 <div class="card">
-  <h1>BENIQR</h1>
+  <h1 id="local">BENIQR</h1>
   <p style="text-align:center;">Elegí tu pedido</p>
 
-  <!-- SANDWICH DE MIGA -->
-  <div class="category" onclick="toggle('sandwich')">🥪 Sándwiches de miga</div>
-  <div id="sandwich" class="products">
-
-    <div class="subcategory">Clásicos</div>
-    <div class="product">
-      <input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
-    <div class="product">
-      <input type="checkbox" value="Jamón y huevo"> Jamón y huevo</div>
-    <div class="product">
-      <input type="checkbox" value="Jamón y tomate"> Jamón y tomate</div>
-    <div class="product">
-      <input type="checkbox" value="Queso y salame"> Queso y salame</div>
-    <div class="product">
-      <input type="checkbox" value="Queso y aceitunas"> Queso y aceitunas</div>
-    <div class="product">
-      <input type="checkbox" value="Queso y choclo"> Queso y choclo</div>
-
-    <div class="subcategory">Especiales</div>
-    <div class="product">
-      <input type="checkbox" value="Jamón crudo y queso"> Jamón crudo y queso</div>
-    <div class="product">
-      <input type="checkbox" value="Jamón crudo, rúcula y parmesano"> Jamón crudo, rúcula y parmesano</div>
+  <div class="category" onclick="toggle('miga')">🥪 Sándwiches de miga</div>
+  <div id="miga" class="products">
+    <div class="product"><input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
+    <div class="product"><input type="checkbox" value="Jamón y huevo"> Jamón y huevo</div>
+    <div class="product"><input type="checkbox" value="Jamón y tomate"> Jamón y tomate</div>
+    <div class="product"><input type="checkbox" value="Queso y salame"> Queso y salame</div>
+    <div class="product"><input type="checkbox" value="Queso y aceitunas"> Queso y aceitunas</div>
+    <div class="product"><input type="checkbox" value="Queso y choclo"> Queso y choclo</div>
   </div>
 
-  <!-- CONGELADOS -->
   <div class="category" onclick="toggle('congelados')">❄️ Comida congelada</div>
   <div id="congelados" class="products">
-
-    <div class="product">
-      <input type="checkbox" value="Bondiola desmenuzada con pan"> Bondiola desmenuzada con pan</div>
-    <div class="product">
-      <input type="checkbox" value="Empanadas"> Empanadas</div>
-    <div class="product">
-      <input type="checkbox" value="Pizzas"> Pizzas</div>
-
+    <div class="product"><input type="checkbox" value="Bondiola desmenuzada"> Bondiola desmenuzada</div>
+    <div class="product"><input type="checkbox" value="Empanadas"> Empanadas</div>
+    <div class="product"><input type="checkbox" value="Pizzas"> Pizzas</div>
   </div>
 
-  <button onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
+  <button onclick="enviarPedido()">📲 Enviar pedido</button>
 </div>
+
+<script>
+  const comercios = {
+    patagonia: "Fiambrería La Patagonia",
+    kiosco: "gusty",
+    kiosco: " el angel "
+  };
+
+  const path = window.location.pathname.replace("/", "");
+  const nombre = comercios[path] || "Comercio";
+
+  document.getElementById("local").innerText = "BENIQR - " + nombre;
+
+  function toggle(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+
+  function enviarPedido() {
+    const checks = document.querySelectorAll("input[type=checkbox]:checked");
+    if (checks.length === 0) {
+      alert("Seleccioná al menos un producto");
+      return;
+    }
+
+    let pedido = `Pedido de: ${nombre}%0A%0A`;
+    checks.forEach(c => pedido += `- ${c.value}%0A`);
+
+    const telefono = "5491170373536"; // TU WHATSAPP
+    window.open(`https://wa.me/${telefono}?text=${pedido}`, "_blank");
+  }
+</script>
 
 </body>
 </html>
