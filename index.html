@@ -1,143 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>BENIQR – Pedidos</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>BENIQR - Pedidos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
 
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  padding: 20px;
-}
+    h1 {
+      text-align: center;
+      color: #8b0000;
+    }
 
-.card {
-  background: #ffffff;
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+    .category {
+      background: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-h1 {
-  color: #c1121f;
-  text-align: center;
-}
+    .products {
+      display: none;
+      margin-left: 10px;
+    }
 
-.category {
-  background: #eee;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
+    .item {
+      background: #eee;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 5px;
+    }
 
-.subcategory {
-  background: #ddd;
-  padding: 10px;
-  border-radius: 8px;
-  margin: 10px 0 5px;
-  font-weight: bold;
-}
+    .whatsapp {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
 
-.products {
-  display: none;
-  margin-top: 10px;
-}
-
-.product {
-  margin-bottom: 6px;
-}
-
-button {
-  background: #25D366;
-  color: white;
-  border: none;
-  padding: 15px;
-  font-size: 17px;
-  border-radius: 10px;
-  width: 100%;
-  cursor: pointer;
-  margin-top: 20px;
-}
-</style>
+  <script>
+    function toggle(id) {
+      const section = document.getElementById(id);
+      section.style.display = section.style.display === "block" ? "none" : "block";
+    }
+  </script>
 </head>
 
 <body>
 
-<div class="card">
-  <h1 id="local">BENIQR</h1>
+  <h1>BENIQR</h1>
   <p style="text-align:center;">Elegí tu pedido</p>
 
-  <div class="category" onclick="toggle('sandwich')">🥪 Sándwiches de miga</div>
-   <div id="sandwich" class="products">
-
-    <div class="subcategory">Clásicos</div>
-    <div class="product"><input type="checkbox" value="Jamón y queso"> Jamón y queso</div>
-    <div class="product"><input type="checkbox" value="Jamón y huevo"> Jamón y huevo</div>
-    <div class="product"><input type="checkbox" value="Jamón y tomate"> Jamón y tomate</div>
-    <div class="product"><input type="checkbox" value="Queso y salame"> Queso y salame</div>
-    <div class="product"><input type="checkbox" value="Queso y aceitunas"> Queso y aceitunas</div>
-    <div class="product"><input type="checkbox" value="Queso y choclo"> Queso y choclo</div>
-
-    <div class="subcategory">Especiales</div>
-    <div class="product"><input type="checkbox" value="Jamón crudo y queso"> Jamón crudo y queso</div>
-    <div class="product"><input type="checkbox" value="Jamón crudo, rúcula y queso parmesano">
-      Jamón crudo, rúcula y queso parmesano</div>
-     
-     </div>
-
-<div id="congelados" class="products">
-
-  <div class="subcategory">Envasado al vacío</div>
-
-  <div class="product">
-    <input type="checkbox" value="Bondiola desmenuzada (con panes, envasada al vacío)">
-    Bondiola desmenuzada (con panes)
+  <!-- SANDWICHES DE MIGA -->
+  <div class="category" onclick="toggle('miga')">
+    🥪 Sándwiches de miga
   </div>
 
-  <div class="subcategory">Congelados</div>
-
-  <div class="product">
-    <input type="checkbox" value="Empanadas congeladas">
-    Empanadas congeladas
-  </div>
-
-  <div class="product">
-    <input type="checkbox" value="Pizzas congeladas">
-    Pizzas congeladas
-  </div>
-
-  <button onclick="enviarPedido()">📲 Enviar pedido</button>
-</div>
-
-<script>
-function toggle(id) {
-  const section = document.getElementById(id);
-  section.style.display = section.style.display === "block" ? "none" : "block";
-}
-
-function enviarPedido() {
-  const telefono = "5491170373536"; 
-  let pedido = "";
-
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach(input => {
-    pedido += `• ${input.value}\n`;
-  });
-
-  if (pedido === "") {
-    alert("Seleccioná al menos un producto.");
-    return;
-  }
-
-  const mensaje = `Hola! Quiero hacer un pedido desde BENIQR.\n\nPedido:\n${pedido}`;
-  const link = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-  window.open(link, "_blank");
-}
-</script>
-
-</body>
-</html>
+  <div class="products" id="miga">
+    <div cla
